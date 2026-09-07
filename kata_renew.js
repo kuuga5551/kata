@@ -20,6 +20,14 @@ let stats = {
 
 const RENEW_DATES_FILE = path.join(process.cwd(), 'renew_dates.json');
 
+function ensureRenewDatesFile() {
+    if (!fs.existsSync(RENEW_DATES_FILE)) {
+        fs.writeFileSync(RENEW_DATES_FILE, '{}', 'utf8');
+        console.log('[初始化] 创建 renew_dates.json');
+    }
+}
+ensureRenewDatesFile();
+
 function loadRenewDates() {
     if (fs.existsSync(RENEW_DATES_FILE)) {
         try {
